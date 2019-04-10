@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Название реактива </th>
+                <th>Фасовка </th>
+                <th>Единица измерения </th>
+                <th>Производитель </th>
+                <th>Заказчик </th>
+                <th>Время заказа </th>
+
+                
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.reagent_name }} </td>
+                <td>{{ item.package }} </td>
+                <td>{{ item.package_unit }} </td>
+                <td>{{ item.vendor_name }} </td>
+                <td>{{ item.author }} </td>
+                <td>{{ item.order_published }} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
+
