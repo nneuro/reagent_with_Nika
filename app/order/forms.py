@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, SelectField, StringField, SubmitField, TextAreaField
+from wtforms import SelectMultipleField, widgets
 from wtforms.validators import DataRequired, NumberRange
 from app.order.constants import URGENCY, AIM
 
@@ -26,4 +27,16 @@ class ReagentOrderForm(FlaskForm):
 
     reagent_comments = TextAreaField('Комментарий к реактиву')
 
+    submit = SubmitField('Добавить реактив в Заказ', render_kw={"class": "form-check-label"})
+
+   
+class MultiCheckboxField(SelectMultipleField):
+    widget = widgets.ListWidget(prefix_label=False)
+    option_widget = widgets.CheckboxInput()
+
+class BrifStoreForm(FlaskForm):
+    choices = [(1, 'one'),
+        (2, 'two'),
+        (3, 'tree')]
+    resident = MultiCheckboxField('Label', choices=choices, coerce=int)
     submit = SubmitField('Добавить реактив в Заказ', render_kw={"class": "form-check-label"})

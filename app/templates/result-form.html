@@ -1,0 +1,19 @@
+<ul>
+    ttt
+    {% for field in form if field.widget.input_type != 'hidden' %}
+        {% if field.data %}
+            <li>
+                {{ field.label }}<br>
+                {% if field.type == 'MultiCheckboxField' %}
+                    {% for opt in field.data %}
+                        {{ dict(field.choices)[opt] }}<br>
+                    {% endfor %}
+                {% elif field.type == 'RadioField' %}
+                    {{ dict(field.choices)[field.data] }}<br>
+                {% else %}
+                    {{ field.data }}
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

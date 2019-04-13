@@ -1,0 +1,19 @@
+set FLASK_APP=reagents_order.py & set SQLALCHEMY_TRACK_MODIFICATION = False
+flask run
+set FLASK_APP=reagents_order.py & set FLASK_DEBUG=1 & set SQLALCHEMY_TRACK_MODIFICATION = False
+
+База данных:
+создание - flask db init
+первая миграция flask db migrate -m "start table"
+далее - flask db upgrade
+
+Виртуальное окружение
+python -m venv env
+
+pip install -r requirements.txt
+
+
+cd C:\projects\Nika\reagents_order-user_logins\reagents_order-user_logins 
+
+
+

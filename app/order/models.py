@@ -18,4 +18,6 @@ class ItemInOrder(db.Model):
     reagent_status = db.Column(db.String, index=True, default='черновик')
 
     def __repr__(self):
-        return '<ItemInOrder {}>'.format(self.id)
+        return '<ItemInOrder {}>'.format(self.reagent_name, self.vendor_name, self.package)
+
+    

@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Черновики заказов</title>
+    <title>Заказы для отправки поставщику</title>
 </head>
     <body>
-        <h2> ЧЕРНОВИКИ ЗАКАЗОВ </h2>>
+        <h2> ЗАКАЗЫ ДЛЯ ОТПРАВКИ ПОСТАВЩИКУ </h2>>
+        <form action="" method="post"></form>
         <table>
             <tr>
                 <th>Название реактива </th>
                 <th>Фасовка </th>
                 <th>Единица измерения </th>
                 <th>Производитель </th>
-                <th>Заказчик </th>
-                <th>Время заказа </th>
                 
+                <th>Кнопка </th>
 
                 
             </tr>
@@ -24,13 +24,12 @@
                 <td>{{ item.package }} </td>
                 <td>{{ item.package_unit }} </td>
                 <td>{{ item.vendor_name }} </td>
-                <td>{{ item.author }} </td>
-                <td>{{ item.order_published }} </td>
                 
+                <td><input type="checkbox" name="a" value="{{ item.id }}"> Выбрать</td>
                 
             </tr>
             {% endfor %}
         </table>
+        <p><input type="submit" value="Отправить"></p>
     </body>
 </html>
-
