@@ -1,10 +1,9 @@
-
 <ul>
         {% for field in form if field.widget.input_type != 'hidden' %}
             {% if field.data %}
                 <li>
                     {{ field.label }}<br>
-                    {% if field.type == 'ReagentToOrderForm' %}
+                    {% if field.type == 'MultiCheckboxField' %}
                         {% for opt in field.data %}
                             {{ dict(field.choices)[opt] }}<br>
                         {% endfor %}
@@ -17,15 +16,3 @@
             {% endif %}
         {% endfor %}
     </ul>
-
-
-
-
-<!-- <ul>
-    ttt
-    {% for item in items %}
-    <p> <input type="checkbox" name="formcheckbox" value="{{ item.id }}" checked></p>
-    {% endfor %}
-   
-</ul> -->
-

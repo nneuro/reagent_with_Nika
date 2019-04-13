@@ -29,7 +29,17 @@ class ReagentOrderForm(FlaskForm):
 
     submit = SubmitField('Добавить реактив в Заказ', render_kw={"class": "form-check-label"})
 
-   
+class ReagentToOrderForm(SelectMultipleField):
+    option_widget = widgets.CheckboxInput()
+    widget = widgets.ListWidget(prefix_label=False)
+    
+    
+
+class ReagentToOrderForm1(FlaskForm):
+    ordered_order = ReagentToOrderForm('Label')
+    submit = SubmitField('Выбрать для заказа поставщику', render_kw={"class": "form-check-label"})
+
+
 class MultiCheckboxField(SelectMultipleField):
     widget = widgets.ListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()
@@ -39,4 +49,4 @@ class BrifStoreForm(FlaskForm):
         (2, 'two'),
         (3, 'tree')]
     resident = MultiCheckboxField('Label', choices=choices, coerce=int)
-    submit = SubmitField('Добавить реактив в Заказ', render_kw={"class": "form-check-label"})
+    submit = SubmitField('Тест SubmitField', render_kw={"class": "form-check-label"})
