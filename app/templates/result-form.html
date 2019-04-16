@@ -1,31 +1,20 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список для отправки поставщику</title>
+</head>
+    <body>
+        <h2> Список для отправки поставщику </h2>>
+<form action="" method="get" novalidate>
 <ul>
-        {% for field in form if field.widget.input_type != 'hidden' %}
-            {% if field.data %}
-                <li>
-                    {{ field.label }}<br>
-                    {% if field.type == 'ReagentToOrderForm' %}
-                        {% for opt in field.data %}
-                            {{ dict(field.choices)[opt] }}<br>
-                        {% endfor %}
-                    {% elif field.type == 'RadioField' %}
-                        {{ dict(field.choices)[field.data] }}<br>
-                    {% else %}
-                        {{ field.data }}
-                    {% endif %}
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-
-
-
-
-<!-- <ul>
     ttt
     {% for item in items %}
-    <p> <input type="checkbox" name="formcheckbox" value="{{ item.id }}" checked></p>
+        <!-- {% if item.reagent_status=="Передан поставщику" %} -->
+        <p>{{ item.reagent_name }}</p>
+        <!-- {% endif %} -->
     {% endfor %}
    
-</ul> -->
+</ul>
+</form>
 

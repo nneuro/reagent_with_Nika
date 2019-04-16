@@ -35,18 +35,23 @@ class ReagentToOrderForm(SelectMultipleField):
     
     
 
-class ReagentToOrderForm1(FlaskForm):
-    ordered_order = ReagentToOrderForm('Label')
-    submit = SubmitField('Выбрать для заказа поставщику', render_kw={"class": "form-check-label"})
+
 
 
 class MultiCheckboxField(SelectMultipleField):
     widget = widgets.ListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()
 
+class BrifStoreForm1(FlaskForm):
+    choices = [(1, 'one'), (2, 'two'),]
+    resident = MultiCheckboxField('Label',choices=choices, coerce=int)
+    submit = SubmitField('тест submit', render_kw={"class": "form-check-label"})
+    
+    
+
 class BrifStoreForm(FlaskForm):
     choices = [(1, 'one'),
-        (2, 'two'),
-        (3, 'tree')]
-    resident = MultiCheckboxField('Label', choices=choices, coerce=int)
-    submit = SubmitField('Тест SubmitField', render_kw={"class": "form-check-label"})
+           (2, 'two'),
+           (3, 'tree')]
+    resident = MultiCheckboxField('Label',choices=choices, coerce=int)
+    submit = SubmitField('тест submit', render_kw={"class": "form-check-label"})

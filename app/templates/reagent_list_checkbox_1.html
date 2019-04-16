@@ -6,17 +6,14 @@
 </head>
     <body>
         <h2> ЗАКАЗЫ ДЛЯ ОТПРАВКИ ПОСТАВЩИКУ </h2>>
-        <form action="" method="post">
+        <form action="" method="post" novalidate>
         <table>
             <tr>
                 <th>Название реактива </th>
                 <th>Фасовка </th>
-                <th>Единица измерения </th>
+                <th>Единица </br>измерения </th>
                 <th>Производитель </th>
                 <th>Кнопка </th>
-                
-                
-
                 
             </tr>
             {% for item in items %}
@@ -25,16 +22,21 @@
                 <td>{{ item.package }} </td>
                 <td>{{ item.package_unit }} </td>
                 <td>{{ item.vendor_name }} </td>
+               
                 
-                <td><input type="checkbox" name="a" value="{{ item.id }}"> Выбрать</td>
-                
-                
+                <td><input type="checkbox" name="Выбрать" value={{ item.id }}> Выбрать</td>
+                           
                 
             </tr>
             {% endfor %}
+            
         </table>
-        <p>{{ form.submit() }}</p>
-        <p><input type="submit" value="Отправить"></p>
+        <div>
+                <input type="submit" value="Отправить" id="submit"/>
+            </div>
+
+        
+        
         </form>
     </body>
 </html>
