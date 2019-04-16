@@ -87,7 +87,7 @@ def brif_store1():
     for i in items:
         a=i.id
         b=(int(a))
-        c=str(i.reagent_name)
+        c=f'{i.reagent_name}, {i.vendor_name}, {i.package}, {i.package_unit}'
         d=(b, c)
         blank_list.append(d)
     choices = blank_list
@@ -98,6 +98,10 @@ def brif_store1():
         submit = SubmitField('тест submit', render_kw={"class": "form-check-label"})
 
     form = BrifStoreForm1()
+
+    if request.method == 'GET':
+        print(form.resident, dir(form.resident))
+        return render_template('brif-store1.html', form=form)
 
     if request.method == 'POST':# and form.validate_on_submit():
         print(form, dir(form))
