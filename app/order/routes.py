@@ -67,11 +67,11 @@ def reagent_checkbox_field_():
     items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
     blank_list=[]
     for i in items:
-        c=f'{i.reagent_name}, {i.package}, {i.package_unit}, {i.vendor_name}'
+        # c=f'{i.reagent_name}, {i.package}, {i.package_unit}, {i.vendor_name}'
         blank_list.append(
             (i.id, i)
         )
-    choices = blank_list
+    # choices = blank_list
     # print(choices)
     #class Reagent_checkbox(FlaskForm):
     #    choices = blank_list
@@ -81,7 +81,7 @@ def reagent_checkbox_field_():
     form.reagent_checkbox_field.choices = blank_list
 
     if request.method == 'GET':
-        print(form.reagent_checkbox_field)
+        print(form.reagent_checkbox_field.choices)
         # print(form.reagent_checkbox_field, dir(form.reagent_checkbox_field))
         return render_template('reagent_checkbox_field_.html', form=form, items=items)
 
