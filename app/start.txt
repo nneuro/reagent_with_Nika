@@ -13,7 +13,7 @@ python -m venv env
 pip install -r requirements.txt
 
 
-cd C:\projects\Nika\reagents_order-user_logins\reagents_order-user_logins 
 
 
+cd C:\projects\data_reagent_2\reagents_order-user_logins>
 

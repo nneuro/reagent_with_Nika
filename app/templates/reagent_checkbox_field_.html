@@ -1,0 +1,20 @@
+
+
+<form action="" method="post" novalidate>
+        {% if form.reagent_checkbox_field %}
+            {#{ form.reagent_checkbox_field }#}
+
+            {% for id, item, checked in form.reagent_checkbox_field.iter_choices() %}
+                <li><input type="checkbox" name="{{ form.reagent_checkbox_field.name }}" value="{{ item.id }}">
+                    {% if 'reagent_status' in fields %}{{ item.reagent_status }}{% endif %}
+                    {% if 'name' in fields %}{{ item.name }}{% endif %}
+                </li>
+            {% endfor %}
+
+        {% endif %}
+        <input type="submit" name="_send" value="Выбрать для отправки поставщику">
+        <input type="submit" name="_remove" value="Удалить">
+        </form>
+
+
+        

@@ -24,6 +24,7 @@ def reagent_get():
 
     return render_template('reagent_get.html', title='Добавление нового реактива', form=form)
 
+
 @app.route('/reagent_list')
 def reagent_list():
     
@@ -44,8 +45,6 @@ def reagent_list():
 
 
 
-
-
 @app.route('/reagent_list_checkbox', methods=['GET', 'POST'])
 def reagent_list_checkbox():
     
@@ -58,91 +57,81 @@ def reagent_list_checkbox():
     return render_template('reagent_list_checkbox.html', items=items)
 
 
-from flask import Flask, render_template, request
-from app.order.forms import BrifStoreForm
 
-@app.route('/brif-store', methods=['GET', 'POST'])
-def brif_store():
-    form = BrifStoreForm()
-    if request.method == 'GET':
-        print(form.resident, dir(form.resident))
-        return render_template('brif-store.html', form=form)
-    print(form.choices)
-    if request.method == 'POST':# and form.validate_on_submit():
-        print(form, dir(form))
-        return render_template('result-form1.html',
-                           form=form)
-    return render_template('brif-store.html',
-                         form=form)
-
-
-from app.order.forms import BrifStoreForm1
+from app.order.forms import Reagent_checkbox, MultiCheckboxField
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
-@app.route('/brif-store1', methods=['GET', 'POST'])
-def brif_store1():
+@app.route('/reagent_checkbox_field_', methods=['GET', 'POST'])
+def reagent_checkbox_field_():
     
     items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
     blank_list=[]
     for i in items:
-        a=i.id
-        b=(int(a))
-        c=f'{i.reagent_name}, {i.vendor_name}, {i.package}, {i.package_unit}'
-        d=(b, c)
-        blank_list.append(d)
+        c=f'{i.reagent_name}, {i.package}, {i.package_unit}, {i.vendor_name}'
+        blank_list.append(
+            (i.id, i)
+        )
     choices = blank_list
-    print(choices)
-    class BrifStoreForm1(FlaskForm):
-        choices = blank_list
-        resident = MultiCheckboxField('Выбранные реактивы',choices=choices, coerce=int)
-        submit = SubmitField('тест submit', render_kw={"class": "form-check-label"})
-
-    form = BrifStoreForm1()
+    # print(choices)
+    #class Reagent_checkbox(FlaskForm):
+    #    choices = blank_list
+    #    reagent_checkbox_field = MultiCheckboxField('Выбранные реактивы',choices=choices, coerce=int)
+        
+    form = Reagent_checkbox()
+    form.reagent_checkbox_field.choices = blank_list
 
     if request.method == 'GET':
-        print(form.resident, dir(form.resident))
-        return render_template('brif-store1.html', form=form)
+        print(form.reagent_checkbox_field)
+        # print(form.reagent_checkbox_field, dir(form.reagent_checkbox_field))
+        return render_template('reagent_checkbox_field_.html', form=form, items=items)
 
     if request.method == 'POST':# and form.validate_on_submit():
-        print(form, dir(form))
+        # print(form)
+        # print(form, dir(form))
+        # print(form.field.label)
+        if '_send' in request.form:
+            print(11111)
         return render_template('result-form1.html',
-                           form=form)
-    return render_template('brif-store1.html',
-                         form=form)                        
+                           form=form, items=items)
+    return render_template('reagent_checkbox_field_.html',
+                         form=form, items=items)                        
 
 
 
-from app.order.forms import MultiCheckboxField
-@app.route('/reagent_list_checkbox_2', methods=['GET', 'POST'])
-def reagent_list_checkbox_2():
-      
-    
-    items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
-    
+
+
+
+
+
+
+# from app.order.forms import MultiCheckboxField
+# @app.route('/reagent_list_checkbox_2', methods=['GET', 'POST'])
+# def reagent_list_checkbox_2():
+          
+#     items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
+          
+#     blank_list=[]
+#     for i in items:
+#         a=i.id
+#         b=(int(a))
+#         c=str(a)
+#         d=(b, c)
+#         blank_list.append(d)
+#     choices = blank_list
+#     print(choices)
        
-    blank_list=[]
-    for i in items:
-        a=i.id
-        b=(int(a))
-        c=str(a)
-        d=(b, c)
-        blank_list.append(d)
-    choices = blank_list
-    print(choices)
-    
-    
-    resident = MultiCheckboxField('Label',choices=choices, coerce=int)
-    return render_template('reagent_list_checkbox_2.html', items=items, choices=choices, resident=resident)                         
+#     resident = MultiCheckboxField('Label',choices=choices, coerce=int)
+#     return render_template('reagent_list_checkbox_2.html', items=items, choices=choices, resident=resident)                         
 
 
-@app.route('/reagent_list_checkbox_1', methods=['GET', 'POST'])
-def reagent_list_checkbox_1():
+# @app.route('/reagent_list_checkbox_1', methods=['GET', 'POST'])
+# def reagent_list_checkbox_1():
     
     
     
-    items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
+#     items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
     
-    return render_template('reagent_list_checkbox_1.html', items=items)
+#     return render_template('reagent_list_checkbox_1.html', items=items)
 
     # if request.method == 'POST':
     # elif request.method == 'GET':
@@ -151,7 +140,6 @@ def reagent_list_checkbox_1():
 
     #     return render_template('result-form.html',items=items)
     # return render_template('reagent_list_checkbox_1.html',items=items)
-
 
 
 
