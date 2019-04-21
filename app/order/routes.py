@@ -67,16 +67,8 @@ def reagent_checkbox_field_():
     items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
     blank_list=[]
     for i in items:
-        # c=f'{i.reagent_name}, {i.package}, {i.package_unit}, {i.vendor_name}'
-        blank_list.append(
-            (i.id, i)
-        )
-    # choices = blank_list
-    # print(choices)
-    #class Reagent_checkbox(FlaskForm):
-    #    choices = blank_list
-    #    reagent_checkbox_field = MultiCheckboxField('Выбранные реактивы',choices=choices, coerce=int)
-        
+        blank_list.append((i.id, i))
+            
     form = Reagent_checkbox()
     form.reagent_checkbox_field.choices = blank_list
 
@@ -86,12 +78,13 @@ def reagent_checkbox_field_():
         return render_template('reagent_checkbox_field_.html', form=form, items=items)
 
     if request.method == 'POST':# and form.validate_on_submit():
-        # print(form)
+        print(form.reagent_checkbox_field.choices)
         # print(form, dir(form))
         # print(form.field.label)
         if '_send' in request.form:
             print(11111)
-        return render_template('result-form1.html',
+            # print(field.choices)
+            return render_template('result-form1.html',
                            form=form, items=items)
     return render_template('reagent_checkbox_field_.html',
                          form=form, items=items)                        

@@ -1,18 +1,38 @@
 <ul>
         {% for field in form if field.widget.input_type != 'hidden' %}
+            
             {% if field.data %}
-                <li>
-                    {{ field.label }}<br>
+                
+                        <table>
+                                <tr>
+                                        <th>Название реактива </th>
+                                        <th>Фасовка </th>
+                                        <th>Единица </br>измерения </th>
+                                        <th>Производитель </th>
+                                        
+                                </tr>
+                    
                     {% if field.type == 'MultiCheckboxField' %}
-                        {% for opt in field.data %}
-                            {{ dict(field.choices)[opt] }}<br>
-                        {% endfor %}
-                    {% elif field.type == 'RadioField' %}
-                        {{ dict(field.choices)[field.data] }}<br>
-                    {% else %}
-                        {{ field.data }}
-                    {% endif %}
-                </li>
+                    <tr>
+                        {% for item in items%}
+                            {% for element in field.data %}
+
+                                {% if item.id == element %}
+                                <td>{{ item.reagent_name }} </td>
+                                <td>{{ item.package }} </td>
+                                <td>{{ item.package_unit }} </td>
+                                <td>{{ item.vendor_name }} </td>
+                                    
+                                  
+                                    
+                            </tr> 
+                                {% endif %}    
+                            {% endfor %}  
+                        {% endfor %}  
+                          
+                     {% endif %}
+                    
             {% endif %}
         {% endfor %}
+        
     </ul>
