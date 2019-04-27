@@ -61,10 +61,12 @@ def reagent_list_checkbox():
 from app.order.forms import Reagent_checkbox, MultiCheckboxField
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
+
+
 @app.route('/reagent_checkbox_field_', methods=['GET', 'POST'])
 def reagent_checkbox_field_():
     
-    items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
+    items = ItemInOrder.query.order_by(ItemInOrder.vendor_name).all()
     blank_list=[]
     for i in items:
         blank_list.append((i.id, i))
@@ -73,22 +75,20 @@ def reagent_checkbox_field_():
     form.reagent_checkbox_field.choices = blank_list
 
     if request.method == 'GET':
-        print(form.reagent_checkbox_field.choices)
-        # print(form.reagent_checkbox_field, dir(form.reagent_checkbox_field))
         return render_template('reagent_checkbox_field_.html', form=form, items=items)
 
-    if request.method == 'POST':# and form.validate_on_submit():
-        print(form.reagent_checkbox_field.choices)
-        # print(form, dir(form))
-        # print(form.field.label)
+    if request.method == 'POST':
         if '_send' in request.form:
-            print(11111)
-            # print(field.choices)
             return render_template('result-form1.html',
                            form=form, items=items)
+       
     return render_template('reagent_checkbox_field_.html',
-                         form=form, items=items)                        
+                         form=form, items=items)         
 
+           
+@app.route('/screenwithnotes', methods=['GET', 'POST'])
+def screenwithnotes():
+    return render_template('screenwithnotes.html')
 
 
 

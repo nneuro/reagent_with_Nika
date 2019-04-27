@@ -42,7 +42,7 @@ class MultiCheckboxField(SelectMultipleField):
 class Reagent_checkbox(FlaskForm):
     choices = [(1, 'one'), (2, 'two'),]
     reagent_checkbox_field = MultiCheckboxField('Label',choices=choices, coerce=int)
-    submit = SubmitField('тест submit', render_kw={"class": "form-check-label"})
+    
     
     
 

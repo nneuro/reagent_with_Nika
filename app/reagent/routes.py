@@ -18,3 +18,5 @@ def reagent_add():
         return redirect(url_for('reagent_add'))
 
     return render_template('reagent_add.html', title='Добавление нового реактива', form=form)
+
+#скачивание 

@@ -1,42 +1,28 @@
-
-
 <form action="" method="post" novalidate>
         {% if form.reagent_checkbox_field %}
-            
-
-            
             <table>
-                        <tr>
-                                <th>Название реактива </th>
-                                <th>Фасовка </th>
-                                <th>Единица </br>измерения </th>
-                                <th>Производитель </th>
-                                <th>Кнопка </th>
-                                
-                            </tr>
-                            {% for id, item, checked in form.reagent_checkbox_field.iter_choices() %}
+                    <tr>
+                            <th>Название реактива </th>
+                            <th>Фасовка </th>
+                            <th>Единица </br>измерения </th>
+                            <th>Производитель </th>
+                            <th>Кнопка </th>
+                    </tr>
+                    {% for id, item, checked in form.reagent_checkbox_field.iter_choices() %}
+                    <tr>
+                            <td>{{ item.reagent_name }} </td>
+                            <td>{{ item.package }} </td>
+                            <td>{{ item.package_unit }} </td>
+                            <td>{{ item.vendor_name }} </td>
+                            <td><input type="checkbox" name="{{ form.reagent_checkbox_field.name }}"
+                                    value="{{ item.id }}" {% if checked %}checked{% endif %}>
+                    </tr>
+                {% endfor %}
+            {% endif %}
 
-                            <tr>
-                                    <td>{{ item.reagent_name }} </td>
-                                    <td>{{ item.package }} </td>
-                                    <td>{{ item.package_unit }} </td>
-                                    <td>{{ item.vendor_name }} </td>
-                                   
-                                    
-                                    <td><input type="checkbox" name="{{ form.reagent_checkbox_field.name }}" value="{{ item.id }}" {% if checked %}checked{% endif %}>
-                                               
-                                    
-                                </tr>
-                                   
-                                                       
-            {% endfor %}
-
-        {% endif %}
-
-        </table>
-        <input type="submit" name="_send" value="Выбрать для отправки поставщику">
-        <input type="submit" name="_remove" value="Удалить">
-        </form>
+            </table>
+            <input type="submit" name="_send" value="Выбрать для отправки поставщику">
+            </form>
 
 
         

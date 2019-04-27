@@ -1,17 +1,13 @@
 <ul>
         {% for field in form if field.widget.input_type != 'hidden' %}
-            
             {% if field.data %}
-                
-                        <table>
-                                <tr>
-                                        <th>Название реактива </th>
-                                        <th>Фасовка </th>
-                                        <th>Единица </br>измерения </th>
-                                        <th>Производитель </th>
-                                        
-                                </tr>
-                    
+                    <table>
+                        <tr>
+                                <th>Название реактива </th>
+                                <th>Фасовка </th>
+                                <th>Единица </br>измерения </th>
+                                <th>Производитель </th>
+                        </tr>
                     {% if field.type == 'MultiCheckboxField' %}
                     <tr>
                         {% for item in items%}
@@ -22,17 +18,11 @@
                                 <td>{{ item.package }} </td>
                                 <td>{{ item.package_unit }} </td>
                                 <td>{{ item.vendor_name }} </td>
-                                    
-                                  
-                                    
-                            </tr> 
-                                {% endif %}    
+                        </tr> 
+                                    {% endif %}    
+                                {% endfor %}  
                             {% endfor %}  
-                        {% endfor %}  
-                          
-                     {% endif %}
-                    
-            {% endif %}
-        {% endfor %}
-        
-    </ul>
+                        {% endif %}
+                {% endif %}
+            {% endfor %}
+</ul>
