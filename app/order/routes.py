@@ -86,65 +86,36 @@ def reagent_checkbox_field_():
                          form=form, items=items)         
 
            
-@app.route('/screenwithnotes', methods=['GET', 'POST'])
-def screenwithnotes():
-    return render_template('screenwithnotes.html')
+from app.order.forms import CalculatorForm
 
+@app.route('/calc', methods=['GET', 'POST'])
+def calc():
+    form = CalculatorForm()
+    # coef_molar_conc = 1
+    if request.method == 'GET':
+        return render_template('calc.html', form=form)
 
+    if request.method == 'POST':
+        print('debug3')
 
+        if '_calc' in request.form:
+            print('debug4')
+            print(form.molar_conc_unit.data)
+            print(type(form.molar_conc_unit.data))
+            
+            coef_molar_conc_1 = int(form.molar_conc_unit.data)*(-1)
+            coef_molar_conc = 10**coef_molar_conc_1
+            mass = (float(form.molar_conc.data)*coef_molar_conc*float(form.volume.data)*float(form.molar_mass.data))
+            print(type(form.molar_conc.data))
+            return render_template('calc_result.html', mass=mass)
+                
+    #             # coef_molar_conc = 0.001
+    #             print(type(form.molar_conc.data)
+        # return render_template('calc.html', form=form)
 
-
-
-
-
-# from app.order.forms import MultiCheckboxField
-# @app.route('/reagent_list_checkbox_2', methods=['GET', 'POST'])
-# def reagent_list_checkbox_2():
-          
-#     items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
-          
-#     blank_list=[]
-#     for i in items:
-#         a=i.id
-#         b=(int(a))
-#         c=str(a)
-#         d=(b, c)
-#         blank_list.append(d)
-#     choices = blank_list
-#     print(choices)
-       
-#     resident = MultiCheckboxField('Label',choices=choices, coerce=int)
-#     return render_template('reagent_list_checkbox_2.html', items=items, choices=choices, resident=resident)                         
-
-
-# @app.route('/reagent_list_checkbox_1', methods=['GET', 'POST'])
-# def reagent_list_checkbox_1():
-    
-    
-    
-#     items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
-    
-#     return render_template('reagent_list_checkbox_1.html', items=items)
-
-    # if request.method == 'POST':
-    # elif request.method == 'GET':
-        
-    #     items = ItemInOrder.query.all()
-
-    #     return render_template('result-form.html',items=items)
-    # return render_template('reagent_list_checkbox_1.html',items=items)
-
-
-
-# @app.route('/reagent_list_checkbox', methods=['GET', 'POST'])
-# def reagent_list_checkbox():
-#     if request.method == 'GET':
-#         items = ItemInOrder.query.filter_by(reagent_status='черновик').order_by(ItemInOrder.vendor_name).all()
-#         return render_template('reagent_list_checkbox.html', items=items)
-#     elif request.method == 'POST':
-#         items2 = form.
-
-
+    print('debug2')
+                
+            
 
     
 

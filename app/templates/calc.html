@@ -1,0 +1,24 @@
+<form action="" method="post" novalidate>
+
+        
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.molar_conc.label }}<br>
+                {{ form.molar_conc() }}<br><br>
+            </div>
+            <div class="form-group">
+                {{ form.molar_conc_unit.label }}<br>
+                {{ form.molar_conc_unit() }}<br><br>
+            </div>
+            <div class="form-group">
+                {{ form.volume.label }}<br>
+                {{ form.volume() }}<br><br>
+            </div>
+            <div class="form-group">
+                {{ form.molar_mass.label }}<br>
+                {{ form.molar_mass() }}<br><br>
+            </div>
+
+        <input type="submit" name="_calc" value="Рассчитать">
+</form>
+

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, SelectField, StringField, SubmitField, TextAreaField
+from wtforms import IntegerField, SelectField, StringField, SubmitField, TextAreaField, DecimalField
 from wtforms import SelectMultipleField, widgets
 from wtforms.validators import DataRequired, NumberRange
 from app.order.constants import URGENCY, AIM
@@ -43,12 +43,23 @@ class Reagent_checkbox(FlaskForm):
     choices = [(1, 'one'), (2, 'two'),]
     reagent_checkbox_field = MultiCheckboxField('Label',choices=choices, coerce=int)
     
-    
-    
 
-class BrifStoreForm(FlaskForm):
-    choices = [(1, 'one'),
-           (2, 'two'),
-           (3, 'tree')]
-    resident = MultiCheckboxField('Label',choices=choices, coerce=int)
+
+
+class CalculatorForm(FlaskForm):
+    molar_conc = DecimalField("Молярная концентрация")
+    molar_conc_unit = SelectField('Единица молярной концентрации', choices = [
+                    (1, 'M'),
+                    (3, 'mM'),
+                    (6, 'mkM'),
+                    (9, 'nM')])
+    volume = DecimalField("Объём")
+    molar_mass = DecimalField("Молярная масса (грамм/моль)")
+
+
+
+
+
+
+
     
