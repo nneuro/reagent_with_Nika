@@ -60,6 +60,12 @@ class CalculatorForm(FlaskForm):
                     (6, 'mkl'),
                     (9, 'nl')])
     molar_mass = DecimalField("Молярная масса (грамм/моль)")
+    mass_def = DecimalField("Масса")
+    mass_unit = SelectField('Единица массы', choices = [
+                    (0, 'g'),
+                    (3, 'mg'),
+                    (6, 'mkg'),
+                    (9, 'ng')])
 
 
 
