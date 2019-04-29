@@ -49,11 +49,16 @@ class Reagent_checkbox(FlaskForm):
 class CalculatorForm(FlaskForm):
     molar_conc = DecimalField("Молярная концентрация")
     molar_conc_unit = SelectField('Единица молярной концентрации', choices = [
-                    (1, 'M'),
+                    (0, 'M'),
                     (3, 'mM'),
                     (6, 'mkM'),
                     (9, 'nM')])
     volume = DecimalField("Объём")
+    vol_unit = SelectField('Единица объёма', choices = [
+                    (0, 'L'),
+                    (3, 'ml'),
+                    (6, 'mkl'),
+                    (9, 'nl')])
     molar_mass = DecimalField("Молярная масса (грамм/моль)")
 
 

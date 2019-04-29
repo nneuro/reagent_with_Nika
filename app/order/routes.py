@@ -103,11 +103,19 @@ def calc():
             print(form.molar_conc_unit.data)
             print(type(form.molar_conc_unit.data))
             
-            coef_molar_conc_1 = int(form.molar_conc_unit.data)*(-1)
-            coef_molar_conc = 10**coef_molar_conc_1
-            mass = (float(form.molar_conc.data)*coef_molar_conc*float(form.volume.data)*float(form.molar_mass.data))
-            print(type(form.molar_conc.data))
-            return render_template('calc_result.html', mass=mass)
+            coef_molar_conc =10**(int(form.molar_conc_unit.data)*(-1))
+            coef_vol = 10**(int(form.vol_unit.data)*(-1))
+            mass_1 = (float(form.molar_conc.data)*coef_molar_conc*coef_vol*float(form.volume.data)*float(form.molar_mass.data))
+            
+            if mass_1 >= 1:
+                mass =  (f'Масса составляет {mass_1} грамм')
+                return render_template('calc_result.html', mass=mass)
+            elif mass_1<1:
+                mass = (f'Масса составляет {mass_1*1000} миллиграмм')
+                return render_template('calc_result.html', mass=mass)
+            
+
+            
                 
     #             # coef_molar_conc = 0.001
     #             print(type(form.molar_conc.data)
