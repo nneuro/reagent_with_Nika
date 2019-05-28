@@ -50,22 +50,22 @@ class CalculatorForm(FlaskForm):
     molar_conc = DecimalField("Молярная концентрация")
     molar_conc_unit = SelectField('Единица молярной концентрации', choices = [
                     (0, 'M'),
-                    (3, 'mM'),
-                    (6, 'mkM'),
-                    (9, 'nM')])
+                    (-3, 'mM'),
+                    ((-6), 'mkM'),
+                    ((-9), 'nM')])
     volume = DecimalField("Объём")
     vol_unit = SelectField('Единица объёма', choices = [
                     (0, 'L'),
-                    (3, 'ml'),
-                    (6, 'mkl'),
-                    (9, 'nl')])
+                    (-3, 'ml'),
+                    (-6, 'mkl'),
+                    (-9, 'nl')])
     molar_mass = DecimalField("Молярная масса (грамм/моль)")
     mass_def = DecimalField("Масса")
     mass_unit = SelectField('Единица массы', choices = [
                     (0, 'g'),
-                    (3, 'mg'),
-                    (6, 'mkg'),
-                    (9, 'ng')])
+                    (-3, 'mg'),
+                    (-6, 'mkg'),
+                    (-9, 'ng')])
 
 
 

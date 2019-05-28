@@ -1,0 +1,27 @@
+<form action="" method="post" novalidate>
+    <h2> Рассчет объёма </h2>
+    <h3> Введите массу, молярную концентрацию и молярную массу вещества (MW)</h3>
+            
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.mass_def.label }}
+                    {{ form.mass_def() }}
+                    {{ form.mass_unit() }}
+                    {{ form.mass_unit.label }}<br><br>
+                </div>
+                
+                <div class="form-group">
+                    {{ form.molar_conc.label }}
+                    {{ form.molar_conc() }}
+                    {{ form.molar_conc_unit() }}
+                    {{ form.molar_conc_unit.label }}<br><br>
+                </div>
+                
+                <div class="form-group">
+                    {{ form.molar_mass.label }}<br>
+                    {{ form.molar_mass() }}<br><br>
+                </div>
+    
+            <input type="submit" name="_calc" value="Рассчитать">
+    </form>

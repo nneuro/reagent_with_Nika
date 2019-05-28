@@ -99,6 +99,8 @@ def calc_start():
             return redirect(url_for('calc_mass'))
         elif '_calc_molar' in request.form: 
             return redirect(url_for('calc_molar'))
+        elif '_calc_volume' in request.form: 
+            return redirect(url_for('calc_volume'))
 
             
 
@@ -120,21 +122,21 @@ def calc_mass():
             print(form.molar_conc_unit.data)
             print(type(form.molar_conc_unit.data))
             
-            coef_molar_conc =10**(int(form.molar_conc_unit.data)*(-1))
-            coef_vol = 10**(int(form.vol_unit.data)*(-1))
+            coef_molar_conc =10**int(form.molar_conc_unit.data)
+            coef_vol = 10**int(form.vol_unit.data)
             mass_1 = (float(form.molar_conc.data)*coef_molar_conc*coef_vol*float(form.volume.data)*float(form.molar_mass.data))
             
             if mass_1 >= 1:
-                mass =  (f'Масса составляет {mass_1} грамм')
+                mass =  (f'Масса составляет {mass_1:.{2}f} грамм')
                 return render_template('calc_result.html', mass=mass)
             elif 0.001<mass_1<1:
-                mass = (f'Масса составляет {mass_1*1000} миллиграмм')
+                mass = (f'Масса составляет {(mass_1*1000):.{2}f} миллиграмм')
                 return render_template('calc_result.html', mass=mass)
             elif 0.000001<mass_1<=0.001:
-                mass = (f'Масса составляет {mass_1*1000000} микрограмм')
+                mass = (f'Масса составляет {(mass_1*1000000):.{2}f} микрограмм')
                 return render_template('calc_result.html', mass=mass)
             elif mass_1<=0.000001:
-                mass = (f'Масса составляет {mass_1*1000000000} нанограмм')
+                mass = (f'Масса составляет {(mass_1*1000000000):.{2}f} нанограмм')
                 return render_template('calc_result.html', mass=mass)
             
 
@@ -147,31 +149,91 @@ def calc_molar():
 
     if request.method == 'POST':
         print('debug3')
-
         if '_calc' in request.form:
             print('debug4')
-                        
-            coef_mass = 10**(int(form.mass_unit.data)*(-1))
-            coef_vol = 10**(int(form.vol_unit.data)*(-1))
+            coef_mass = 10**int(form.mass_unit.data)
+            coef_vol = 10**int(form.vol_unit.data)
             molar_conc_undef_1 = ((float(form.mass_def.data)*coef_mass)/(float(form.volume.data)*coef_vol*float(form.molar_mass.data)))
             
             if molar_conc_undef_1 >= 1:
-                molar_conc_undef =  (f'Молярная концентрация составляет {molar_conc_undef_1} M')
+                molar_conc_undef =  (
+                    f'Молярная концентрация составляет {(molar_conc_undef_1):.{2}f} M'
+                    )
                 return render_template('calc_molar_result.html', molar_conc_undef=molar_conc_undef)
             elif 0.001<molar_conc_undef_1<1:
-                molar_conc_undef = (f'Молярная концентрация составляет {molar_conc_undef_1*1000} mM')
+                molar_conc_undef = (
+                    f'Молярная концентрация составляет {(molar_conc_undef_1*1000):.{2}f} mM'
+                    )
                 return render_template('calc_molar_result.html', molar_conc_undef=molar_conc_undef)
             elif 0.000001<molar_conc_undef_1<=0.001:
-                molar_conc_undef = (f'Молярная концентрация составляет {molar_conc_undef_1*1000000} mkM')
+                molar_conc_undef = (
+                    f'Молярная концентрация составляет{(molar_conc_undef_1*1000000):.{2}f} mkM'
+                    )
                 return render_template('calc_molar_result.html', molar_conc_undef=molar_conc_undef)
             elif molar_conc_undef_1<=0.000001:
-                molar_conc_undef = (f'Молярная концентрация составляет {molar_conc_undef_1*1000000000} nM')
-                return render_template('calc_molar_result.html', molar_conc_undef=molar_conc_undef)            
-                
+                molar_conc_undef = (
+                    f'Молярная концентрация составляет{(molar_conc_undef_1*1000000000):.{2}f} nM'
+                    )
+                return render_template('calc_molar_result.html', molar_conc_undef=molar_conc_undef) 
 
-                
+       
+@app.route('/calc_volume', methods=['GET', 'POST'])
+def calc_volume():
+    form = CalculatorForm()
+    #volume = mass/molar_mass*molar_conc
+    if request.method == 'GET':
+        return render_template('calc_volume.html', form=form)
+
+    if request.method == 'POST':
+        print('debug3')
+        if '_calc' in request.form:
+            print('debug4')
+            coef_mass = 10**int(form.mass_unit.data)
+            print(form.mass_unit.choices)
+            coef_molar_conc =10**int(form.molar_conc_unit.data)
+            mass_unit_label = dict(form.mass_unit.choices).get(int(form.mass_unit.data))
+            molar_mass_unit_label = dict(form.molar_conc_unit.choices).get(int(form.molar_conc_unit.data))
+            volume_unknown = (
+                (float(form.mass_def.data)*coef_mass)/(float(form.molar_conc.data)*coef_molar_conc*
+                float(form.molar_mass.data))
+                )
             
+            if volume_unknown >= 1:
+                volume_obtained =  (
+                    f'Объём составляет {(volume_unknown):.{2}f} литра(ов)'
+                    )
+                
+            elif 0.001 <volume_unknown < 1:
+                volume_obtained = (
+                    f'Объём составляет {(volume_unknown*1000):.{2}f} миллилитра(ов)'
+                    )
+                
+            elif 0.000001 < volume_unknown <= 0.001:
+                volume_obtained = (
+                    f'Объём составляет {(volume_unknown*1000000):.{2}f} микролитра(ов)'
+                    )
+                
+            elif volume_unknown<=0.000001:
+                volume_obtained = (
+                    f'Объём составляет{(volume_unknown*1000000000):.{2}f} нанолитра(ов)'
+                    )
+            return render_template(
+                    'calc_volume_result.html', 
+                    volume_obtained=volume_obtained,
+                    form=form,
+                    mass_unit_label=mass_unit_label,
+                    molar_mass_unit_label=molar_mass_unit_label
+                    )             
 
-    
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    form = request.form
+    print(form.items)
+    print(f'items {form.items}')
+    print(f'keys {form.keys}')
+    print(f'values {form.get}')
+    # print(dir(type(form)))
+
+    return render_template('test.html', form=form)
 
 

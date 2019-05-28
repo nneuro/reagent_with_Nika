@@ -4,5 +4,5 @@ molar_conc = float(input("Введите молярную концентраци
 volume = float(input("Введите объём: "))
 molar_mass = float(input("Введите молярную массу в единицах гр/моль: "))
 mass = molar_conc * volume * molar_mass
-print(f' Масса равна  {mass}')
+print(f' Масса равна  {(mass):.{2}f}')
 
